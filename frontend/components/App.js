@@ -40,8 +40,19 @@ export default class App extends React.Component {
     });
   }
 
-  addItem = (e, item) => {
+  addTodo = (e, todoName) => {
+    const newTodo = {
+      name: todoName,
+      id: Date.now(),
+      completed: false
+    };
 
+    this.setState({
+      todos: [
+        ...todos,
+        newTodo
+      ]
+    });
   }
 
   clearTodos = () => {
@@ -51,7 +62,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Form />
+        <Form addTodo={ this.addTodo } />
         <TodoList 
           todos={ this.state.todos } 
           toggleTodo={ this.toggleTodo }
