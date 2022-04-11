@@ -25,8 +25,19 @@ export default class App extends React.Component {
     }
   }
 
-  toggleItem = (itemId) => {
-
+  toggleTodo = (todoId) => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todoId === todo.id) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          }
+        } else {
+          return todo;
+        }
+      })
+    });
   }
 
   addItem = (e, item) => {
@@ -34,14 +45,17 @@ export default class App extends React.Component {
   }
 
   clearTodos = () => {
-    
+
   }
 
   render() {
     return (
       <div>
         <Form />
-        <TodoList todos={this.state.todos} />
+        <TodoList 
+          todos={ this.state.todos } 
+          toggleTodo={ this.toggleTodo }
+        />
       </div>
     )
   }
